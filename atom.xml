@@ -6,7 +6,7 @@
   <link href="https://jonty.top/atom.xml" rel="self"/>
   
   <link href="https://jonty.top/"/>
-  <updated>2023-10-31T02:34:32.945Z</updated>
+  <updated>2023-12-21T12:55:32.857Z</updated>
   <id>https://jonty.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Swarm overlay网络详解</title>
+    <link href="https://jonty.top/2023/12/21/docker-swarm-network-overlay/"/>
+    <id>https://jonty.top/2023/12/21/docker-swarm-network-overlay/</id>
+    <published>2023-12-21T12:54:01.000Z</published>
+    <updated>2023-12-21T12:55:32.857Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="查看overlay网络"><a href="#查看overlay网络" class="headerlink" title="查看overlay网络"></a>查看overlay网络</h3><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span> docker network ls</span><br><span class="line">NETWORK ID     NAME              DRIVER    SCOPE</span><br><span class="line">aba37840837a   bridge            bridge    local</span><br><span class="line">20a5dcd30faa   docker<span class="built_in">_</span>gwbridge   bridge    local</span><br><span class="line">97d548bf9e22   host              host      local</span><br><span class="line">yta4shlonx9v   ingress           overlay   swarm</span><br><span class="line">4644b3cc4c43   none              null      local</span><br></pre></td></tr></table></figure><p>对于理解swarm的网络来讲，个人认为最重要的两个点：</p><ul><li><p>第一是外部如何访问部署运行在swarm集群内的服务，可以称之为<code>入方向</code> 流量，在swarm里我们通过<code>ingress</code>来解决</p></li><li><p>第二是部署在swarm集群里的服务，如何对外进行访问，这部分又分为两块:</p><ul><li><p>第一，<code>东西向流量</code> ，也就是不同swarm节点上的容器之间如何通信，swarm通过 <code>overlay </code>网络来解决；</p></li><li><p>第二，<code>南北向流量</code> ，也就是swarm集群里的容器如何对外访问，比如互联网，这个是 <code>Linux bridge + iptables NAT</code> 来解决；</p></li></ul></li></ul><h3 id="创建-overlay-网络"><a href="#创建-overlay-网络" class="headerlink" title="创建 overlay 网络"></a>创建 overlay 网络</h3><p>这个网络会同步到所有的swarm节点上</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span> docker network create -d overlay mynet</span><br><span class="line">4f05pvu8zzj36c2fwu0208wa4</span><br><span class="line"></span><br><span class="line"><span class="built_in">$</span> docker network ls</span><br><span class="line">NETWORK ID     NAME              DRIVER    SCOPE</span><br><span class="line">aba37840837a   bridge            bridge    local</span><br><span class="line">20a5dcd30faa   docker<span class="built_in">_</span>gwbridge   bridge    local</span><br><span class="line">97d548bf9e22   host              host      local</span><br><span class="line">yta4shlonx9v   ingress           overlay   swarm</span><br><span class="line">4f05pvu8zzj3   mynet             overlay   swarm</span><br><span class="line">4644b3cc4c43   none              null      local</span><br></pre></td></tr></table></figure><h3 id="创建服务"><a href="#创建服务" class="headerlink" title="创建服务"></a>创建服务</h3><p>创建一个服务连接到这个 overlay网络， name 是 test ， replicas 是 2</p><p>可以看到这两个容器分别被创建在worker1和worker2两个节点上</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vagrant@swarm-manager:~<span class="built_in">$</span> docker service create --network mynet --name test --replicas 2 busybox ping 8.8.8.8</span><br><span class="line">vagrant@swarm-manager:~<span class="built_in">$</span> docker service ps test</span><br><span class="line">ID             NAME      IMAGE            NODE            DESIRED STATE   CURRENT STATE            ERROR     PORTS</span><br><span class="line">yf5uqm1kzx6d   test.1    busybox:latest   swarm-worker1   Running         Running 18 seconds ago</span><br><span class="line">3tmp4cdqfs8a   test.2    busybox:latest   swarm-worker2   Running         Running 18 seconds ago</span><br></pre></td></tr></table></figure><h3 id="网络查看"><a href="#网络查看" class="headerlink" title="网络查看"></a>网络查看</h3><p>到worker1和worker2上分别查看容器的网络连接情况</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vagrant@swarm-worker1:~<span class="built_in">$</span> docker container ls</span><br><span class="line">CONTAINER ID   IMAGE            COMMAND          CREATED      STATUS      PORTS     NAMES</span><br><span class="line">cac4be28ced7   busybox:latest   &quot;ping 8.8.8.8&quot;   2 days ago   Up 2 days             test.1.yf5uqm1kzx6dbt7n26e4akhsu</span><br><span class="line">vagrant@swarm-worker1:~<span class="built_in">$</span> docker container exec -it cac sh</span><br><span class="line">/ <span class="params">#</span> ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER<span class="built_in">_</span>UP&gt; mtu 65536 qdisc noqueue qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">    valid<span class="built_in">_</span>lft forever preferred<span class="built_in">_</span>lft forever</span><br><span class="line">24: eth0@if25: &lt;BROADCAST,MULTICAST,UP,LOWER<span class="built_in">_</span>UP,M-DOWN&gt; mtu 1450 qdisc noqueue</span><br><span class="line">    link/ether 02:42:0a:00:01:08 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 10.0.1.8/24 brd 10.0.1.255 scope global eth0</span><br><span class="line">    valid<span class="built_in">_</span>lft forever preferred<span class="built_in">_</span>lft forever</span><br><span class="line">26: eth1@if27: &lt;BROADCAST,MULTICAST,UP,LOWER<span class="built_in">_</span>UP,M-DOWN&gt; mtu 1500 qdisc noqueue</span><br><span class="line">    link/ether 02:42:ac:12:00:03 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.18.0.3/16 brd 172.18.255.255 scope global eth1</span><br><span class="line">    valid<span class="built_in">_</span>lft forever preferred<span class="built_in">_</span>lft forever</span><br><span class="line">/ <span class="params">#</span></span><br></pre></td></tr></table></figure><p>这个容器有两个接口 <a href="https://so.csdn.net/so/search?q=eth0&spm=1001.2101.3001.7020">eth0</a>和eth1， 其中eth0是连到了mynet这个网络，eth1是连到docker_gwbridge这个网络</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vagrant@swarm-worker1:~<span class="built_in">$</span> docker network ls</span><br><span class="line">NETWORK ID     NAME              DRIVER    SCOPE</span><br><span class="line">a631a4e0b63c   bridge            bridge    local</span><br><span class="line">56945463a582   docker<span class="built_in">_</span>gwbridge   bridge    local</span><br><span class="line">9bdfcae84f94   host              host      local</span><br><span class="line">14fy2l7a4mci   ingress           overlay   swarm</span><br><span class="line">lpirdge00y3j   mynet             overlay   swarm</span><br><span class="line">c1837f1284f8   none              null      local</span><br></pre></td></tr></table></figure><p>在这个容器里是可以直接ping通worker2上容器的IP 10.0.1.9的</p><p>结构图讲解<br>南北向：主要用于访问外部网络。通过eht1网卡，走veth的docker_gwbridge网络，根据NAT把容器地址转换成主机地址，访问到外部网络。<br>东西向：用于集群之间的网络访问。<code>192.168.200.10</code>上的容器通过eht0访问overlay的网络mynet，将原始数据加一个VXLAN的头，封装成数据包，这时会原始地址就是<code>192.168.200.10</code>，目标IP地址<code>192.168.200.11</code>，通过这个管道发送到目标机器上，再通过overlay网络的mynet接收解封，发送到<code>192.168.200.11</code>的容器上。</p><p>集群的两个节点之间 <code>10.0.1.8 - &gt; 10.0.1.9</code> 转换后两台机器 <code>192.168.200.10 -&gt; 192.168.200.11</code></p><p><img data-src="https://cdn.jonty.top/img/202311221100439.png" alt="image-20231122110010154"></p>]]></content>
+    
+    
+    <summary type="html">Swarm overlay网络详解</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://jonty.top/categories/DevOps/"/>
+    
+    
+    <category term="Docker" scheme="https://jonty.top/tags/Docker/"/>
+    
+    <category term="Docker Swarm" scheme="https://jonty.top/tags/Docker-Swarm/"/>
+    
+  </entry>
   
   <entry>
     <title>Lazy延迟初始化</title>
@@ -102,9 +125,9 @@
     <category term="DevOps" scheme="https://jonty.top/categories/DevOps/"/>
     
     
-    <category term="Gitlab" scheme="https://jonty.top/tags/Gitlab/"/>
-    
     <category term="Docker" scheme="https://jonty.top/tags/Docker/"/>
+    
+    <category term="Gitlab" scheme="https://jonty.top/tags/Gitlab/"/>
     
   </entry>
   
@@ -446,27 +469,6 @@
     <category term="ASP.NET Core" scheme="https://jonty.top/tags/ASP-NET-Core/"/>
     
     <category term="Blazor" scheme="https://jonty.top/tags/Blazor/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AQL抽样方法介绍</title>
-    <link href="https://jonty.top/2023/02/17/acceptance-quality-limit/"/>
-    <id>https://jonty.top/2023/02/17/acceptance-quality-limit/</id>
-    <published>2023-02-17T08:03:55.000Z</published>
-    <updated>2023-03-23T01:56:11.471Z</updated>
-    
-    <content type="html"><![CDATA[<p><img data-src="https://cdn.jonty.top/img/AQL-rev-8.jpg" alt="AQL-rev-8"></p><h2 id="AQL的定义"><a href="#AQL的定义" class="headerlink" title="AQL的定义"></a>AQL的定义</h2><p>AQL原来叫<strong>合格质量水平（Acceptable Quality Level）</strong>，在新版国家标准《GB/T 2828.1-2003 计数抽样检验程序 第1部分：按接收质量限（AQL）检索的逐批检验抽样计划》中，AQL的全称被改为了<strong>接收质量限制（Acceptance Quality Limit）</strong>，其定义为：当一个连续系列批被提交验收抽样时，可允许的最差过程平均质量水平。</p><h2 id="检验水平"><a href="#检验水平" class="headerlink" title="检验水平"></a>检验水平</h2><p>在AQL中，有三种一般检验水平（Ⅰ、Ⅱ、Ⅲ）和四种特殊检验水平（S-1、S-2、S-3、S-4）。<br>在三种一般检验水平中，LEVELⅡ是常规水平，也是最经常采用的水平。从LEVELⅠ到LEVELⅢ抽样的数量逐渐增加。LEVELⅠ的抽样数是LEVELⅡ的40％，适用于品质较为稳定或产品出现不一致可能性极小的状况。LEVELⅢ的抽样数是LEVELⅡ的160％，加大检验的样本数量可以降低接受不合格产品的可能性。<br>四种特殊检验水平的特点是抽样数量少，因为在某些情况下，例如检验的成本高、检验所花费的时间长、货物的品质比较稳定（单一产品的重复加工），通过少量的抽样检验就可以反应总体的品质水平。从S-1到S-4抽样检验数逐步增加。在服装辅料的检验中有时会采用特殊检验水平，例如拉链、纽扣等的检验。</p><h2 id="抽样方案"><a href="#抽样方案" class="headerlink" title="抽样方案"></a>抽样方案</h2><p>AQL有一次、二次、多次（五次）3种抽样方案。确定抽样方案可以从下面几个方面来考虑：<br>1）简便易行：一次优于二次，二次优于五次。<br>2）平均样本量：五次少于二次，二次少于一次。<br>3）管理难度：五次难于二次，二次难于一次。<br>4）取样的难易程度：取样麻烦时，一次优于二次，二次优于五次。<br>5）试验时间的长短：根据单个试验时间的长短和是否可以多个样品同时进行试验来确定总的试验时间。</p><h2 id="严格程度"><a href="#严格程度" class="headerlink" title="严格程度"></a>严格程度</h2><p>AQL中制定了三种严格程度：正常（NORMAL）、加严（TIGHTENED）、放宽（REDUCED）。<br>正常检验是最常用的检验水平，刚开始检验新的供应商生产的货物时，应采用正常检验。<br>一旦采用了正常、严格、放宽中的任何一种，那么在以后对同系列或同类型产品的检验中都应采取这一标准，除非供应商的产品品质发生了变动。</p><h3 id="AQL值"><a href="#AQL值" class="headerlink" title="AQL值"></a>AQL值</h3><p>对于不同的质量水平或要求，AQL有多种规定的数值，从0.010~1000。服装业最常用的AQL值是2.5，要求高一些的用1.5，要求稍低的用4.0。不同的AQL值体现了不同的质量水平，通常AQL值越小代表品质要求越高。</p><h2 id="转移规则和程序"><a href="#转移规则和程序" class="headerlink" title="转移规则和程序"></a>转移规则和程序</h2><h3 id="正常到加严"><a href="#正常到加严" class="headerlink" title="正常到加严"></a>正常到加严</h3><p>当正在采用正常检验时，只要初次检验中连续5批或少于5批中有2批是不可接收的，则转移到加严检验。<br>（注：初次检验指第一次检验，区别于拒收后的再次提交批的检验。再次提交批的检验结果不参与转移。）</p><h3 id="加严到正常"><a href="#加严到正常" class="headerlink" title="加严到正常"></a>加严到正常</h3><p>当正在采用加严检验时，如果初次检验的接连5批已被认为是可接收的，应恢复正常检验。</p><h3 id="正常到放宽"><a href="#正常到放宽" class="headerlink" title="正常到放宽"></a>正常到放宽</h3><p>当正在采用正常检验时，如果连续10次检验都合格、并且生产处于稳定状态的话，可以转移到放宽检验。<br>（注：这个跟GB/T 2828.1-2003的规定不同，因为GB/T 2828.1-2003的条件比较负责，所以可以考虑采用这个比较简单的方法。）</p><h3 id="放宽到正常"><a href="#放宽到正常" class="headerlink" title="放宽到正常"></a>放宽到正常</h3><p>当正在执行放宽检验时，如果初次检验出现下列任一情况，应恢复正常检验：<br>a）一个批未被接收；<br>b）生产不稳定或延迟；<br>c）认为恢复正常检验是正当的其他情况。</p><h3 id="暂停检验"><a href="#暂停检验" class="headerlink" title="暂停检验"></a>暂停检验</h3><p>如果在初次加严检验的一系列连续批中未接受批的累计数达到5批，应暂时停止检验。直到供应商为改进所提供产品或服务的质量已采取行动，而且负责部门承认此行动可能有效时，才能恢复检验。恢复检验应从使用加严检验开始。</p><p>放宽检验是非强制性的，在条件不成熟或无把握的情况下可以不执行。<br>暂停检验也可以不执行。<br>至少要执行正常和加严检验之间的转移规则。</p><h3 id="二次抽样方案"><a href="#二次抽样方案" class="headerlink" title="二次抽样方案"></a>二次抽样方案</h3><p>第一次检验的样品数量应等于该方案给出的第一样本量。如果第一样本中发现的不合格数小于或等于第一接收数，则该批可接收；如果第一样本中发现的不合格品数大于或等于第一拒收数，则该批不可接收。<br>如果第一样本中发现的不合格品数介于第一接收数与第二拒收数之间，应检验由方案给出样本量的第二样本并累计在第一样本和第二样本中发现的不合格品数。如果不合格品累计数小于或等于第二接收数，则判定批可接收；如果不合格品累计数大于或等于第二拒收数，则判定该批不可接收。<br>二次抽样方案的目的是通过检验较少样品数而节约时间，然而当必须进行第二次检验时，抽样检验的总数要超过一次抽样检验的数量，所以二次抽样方案适合于质量比较稳定的产品。</p><h3 id="不合格产品的判定"><a href="#不合格产品的判定" class="headerlink" title="不合格产品的判定"></a>不合格产品的判定</h3><p>根据不同类型的服装可参考相应的行业标准或企业标准，如T恤和Polo衫可参考纺织行业标准《FZ/T 73008-2002 针织T恤衫》。<br>有的公司以一件衣服上有一个或以上严重疵点为一个不合格品，一件衣服上有3个轻微疵点也算一件不合格品。<br>有的公司采用的是记点的方式，即计算样本中的不合格数来判定。</p><p>当样本数超过批量时，应该以整批作为样本（全检），判定数不变。</p><h3 id="AQL抽样检验的方法和步骤"><a href="#AQL抽样检验的方法和步骤" class="headerlink" title="AQL抽样检验的方法和步骤"></a>AQL抽样检验的方法和步骤</h3><p>1、决定检验方案（检验水平、抽样方案、严格程度和AQL值）。检验方案一般由客户决定，也有客户和供应商协商决定的。<br>2、根据检验方案查找样本量字码。<br>3、抽样方案。在AQL中给出了一系列的抽样方案表格，这些表格给出了在不同的品质水平下抽样检验的样本数和接收数（Ac）、拒收数（Re）。<br>4、产品检验。从所要检验的产品中，按照以上所述的样本数，随机抽取样品。在检验中应保证100％地检验所抽取的样本，既使在检验若干件后，发现不合格数已经超过拒收数，仍然应该继续检验剩余的样本，因为检验的目的除了要知道“接受”或“拒收”的结果外，还需要了解货物究竟处于何种质量水平，并且可以通过积累历史数据来判断供应商是否合格和决定以后对供应商的检验方案。对供应商来说，也可以清楚如何去改善产品的品质。<br>5、统计不合格数。<br>6、判定是否接受。对照抽样方案表格中的接收数和拒收数来决定是“接受”还是“拒收”。</p><p>例一：<br>检验方案为一般检验水平Ⅱ、正常检验一次抽样方案、AQL 2.5。<br>如有一批衣服的数量为5000件，则找到对应的“样本量字码”为“L”。<br>在“正常检验一次抽样方案（主表）”中找到样本量字码L，对应的样本量为“200”，表示要抽查200件衣服；AQL 2.5对应的“接收/拒收数”为“10 11”，表示抽查的200件样本中，如果发现的不合格品小于或等于10件的话，则该批产品可接受；如果不合格品等于或大于11的话，则该批产品不可接受。</p><p>例二：<br>检验方案为一般检验水平Ⅱ、正常检验二次抽样方案、AQL 4.0。<br>如有一批衣服的数量为20000件，则找到对应的样本量字码为“M”。<br>从“正常检验二次抽样方案（主表）”中查找到对应的样本量和接收/拒收数。<br>第一次抽样200件，接收/拒收数为“11 16”，不合格品数小于或等于11则接受，不合格品数等于或大于16则拒收，不合格品数为12~15之间则进行第二次抽查；<br>第二次再抽查200件，接收/拒收数为“26 27”，累计不合格品数（加上第一次抽查发现的不合格品数）小于或等于26则接受，累计不合格品数等于或大于27则拒收。</p>]]></content>
-    
-    
-    <summary type="html">AQL-接收质量限制（Acceptance Quality Limit）</summary>
-    
-    
-    
-    <category term="搬砖那些事儿" scheme="https://jonty.top/categories/%E6%90%AC%E7%A0%96%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
-    
-    
-    <category term="AQL" scheme="https://jonty.top/tags/AQL/"/>
     
   </entry>
   
