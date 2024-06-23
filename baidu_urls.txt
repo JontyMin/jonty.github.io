@@ -1,5 +1,5 @@
+https://jonty.top/2024/06/23/abp-vNext-tutorials-part-2/
+https://jonty.top/2024/06/19/abp-vNext-tutorials-part-1/
 https://jonty.top/2024/06/19/getting-start-abp/
+https://jonty.top/2024/03/17/prevent-brainwashing/
 https://jonty.top/2023/12/21/docker-swarm-network-overlay/
-https://jonty.top/2023/10/31/about-of-csharp-lazy-initialization/
-https://jonty.top/2023/08/27/about-of-IP/
-https://jonty.top/2023/07/13/chrome-debugging-tips/
