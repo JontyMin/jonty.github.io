@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="WSIOb3JOJfAsz23EBri68OoFPPfXmPefVY8l9LWiuuQ">
+  <meta name="msvalidate.01" content="BEA1533D8925BA7876293C434544D574">
+  <meta name="baidu-site-verification" content="code-xBDMwADkQe">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=ZCOOL+XiaoWei:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jonty.top","root":"/","images":"/images","scheme":"Mist","version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="基于Abp vNext开发Web应用程序系列 - 集成测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Abp vNext - 应用开发系列之集成测试">
+<meta property="og:url" content="https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/index.html">
+<meta property="og:site_name" content="Jonty&#39;s Blog">
+<meta property="og:description" content="基于Abp vNext开发Web应用程序系列 - 集成测试">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jonty.top/img/202406252306277.png">
+<meta property="og:image" content="https://cdn.jonty.top/img/202406252314984.png">
+<meta property="og:image" content="https://cdn.jonty.top/img/202406252315599.png">
+<meta property="article:published_time" content="2024-06-24T14:35:21.000Z">
+<meta property="article:modified_time" content="2024-06-25T15:18:11.453Z">
+<meta property="article:author" content="JontyWang">
+<meta property="article:tag" content="ABP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jonty.top/img/202406252306277.png">
+
+
+<link rel="canonical" href="https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/","path":"2024/06/24/abp-vNext-tutorials-part-4/","title":"Abp vNext - 应用开发系列之集成测试"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Abp vNext - 应用开发系列之集成测试 | Jonty's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?276415dc0899b092905c4c2730a113a8"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Jonty's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonty's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录搬砖生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">解决方案中的测试项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">添加测试数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-BookAppService"><span class="nav-number">3.</span> <span class="nav-text">测试 BookAppService</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E8%8A%82"><span class="nav-number">4.</span> <span class="nav-text">下一节</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="JontyWang"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">JontyWang</p>
+  <div class="site-description" itemprop="description">莫道桑榆晚，为霞尚满天</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/JontyMin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JontyMin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:amazing4677@gmail.com" title="E-Mail → mailto:amazing4677@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/14014911/jonty" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;14014911&#x2F;jonty" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://jontymin.github.io/" title="https:&#x2F;&#x2F;jontymin.github.io&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://my_netinlove.gitee.io/" title="https:&#x2F;&#x2F;my_netinlove.gitee.io&#x2F;" rel="noopener" target="_blank">Gitee</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/179850046" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;179850046" rel="noopener" target="_blank">Bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/JontyWang/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;JontyWang&#x2F;" rel="noopener" target="_blank">我的园子</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://ldqk.xyz/" title="https:&#x2F;&#x2F;ldqk.xyz&#x2F;" rel="noopener" target="_blank">懒得勤快</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://luciferliu.blog.csdn.net/" title="https:&#x2F;&#x2F;luciferliu.blog.csdn.net&#x2F;" rel="noopener" target="_blank">Lucifer三思而后行</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/edisonchou/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;edisonchou&#x2F;" rel="noopener" target="_blank">EdisonZhou</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/minisite/goods?userCode=b0skjdai&share_source=copy_link" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;minisite&#x2F;goods?userCode&#x3D;b0skjdai&amp;share_source&#x3D;copy_link" rel="noopener" target="_blank">Aliyun</a>
+        </li>
+    </ul>
+  </div>
+
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=543747557&auto=1&height=66"></iframe>
+
+          </div>
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+
+  </aside>
+  <div class="sidebar-dimmer">
+  
+  </div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="JontyWang">
+      <meta itemprop="description" content="莫道桑榆晚，为霞尚满天">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonty's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Abp vNext - 应用开发系列之集成测试
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-24 22:35:21" itemprop="dateCreated datePublished" datetime="2024-06-24T22:35:21+08:00">2024-06-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2024-06-25 23:18:11" itemprop="dateModified" datetime="2024-06-25T23:18:11+08:00">2024-06-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Abp-vNext/" itemprop="url" rel="index"><span itemprop="name">Abp vNext</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">基于Abp vNext开发Web应用程序系列 - 集成测试</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在系列教程中，我们会构建一个基于ABP的Web应用程序，用于管理书籍及其作者列表</p>
+<p>使用到的技术：</p>
+<ul>
+<li>Entity Framework Core</li>
+<li>Angular</li>
+</ul>
+<p>本教程分为以下部分：</p>
+<ul>
+<li><a href="/2024/06/19/abp-vNext-tutorials-part-1/" title="Part1：创建服务端">Part1：创建服务端</a></li>
+<li><a href="/2024/06/23/abp-vNext-tutorials-part-2/" title="Part 2：图书列表页面">Part 2：图书列表页面</a></li>
+<li><a href="/2024/06/23/abp-vNext-tutorials-part-2/" title="Part 3：创建,更新和删除图书">Part 3：创建,更新和删除图书</a></li>
+<li>Part 4: 集成测试（本节）</li>
+<li><a href="#">Post not found: abp-vNext-tutorials-part-5 Part 5：授权</a></li>
+<li><a href="#">Post not found: abp-vNext-tutorials-part-6 Part 6：作者: 领域层</a></li>
+<li><a href="#">Post not found: abp-vNext-tutorials-part-7 Part 7：作者: 数据库集成</a></li>
+<li><a href="#">Post not found: abp-vNext-tutorials-part-8 Part 8：作者: 应用服务层</a></li>
+<li><a href="#">Post not found: abp-vNext-tutorials-part-9 Part 9：作者: 用户界面</a></li>
+<li><a href="#">Post not found: abp-vNext-tutorials-part-10 Part 10：图书到作者的关系</a></li>
+</ul>
+<h2 id="解决方案中的测试项目"><a href="#解决方案中的测试项目" class="headerlink" title="解决方案中的测试项目"></a>解决方案中的测试项目</h2><p>在解决方案目录中，<code>test</code>下包含了测试项目</p>
+<p><img data-src="https://cdn.jonty.top/img/202406252306277.png" alt="image-20240625230642200"></p>
+<p>每个项目用于测试相关的应用程序项目，测试项目使用以下库进行测试:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://xunit.github.io/">xunit</a> 作为主测试框架</li>
+<li><a target="_blank" rel="noopener" href="http://shouldly.readthedocs.io/en/latest/">Shoudly</a> 作为断言库</li>
+<li><a target="_blank" rel="noopener" href="http://nsubstitute.github.io/">NSubstitute</a> 作为模拟库</li>
+</ul>
+<h2 id="添加测试数据"><a href="#添加测试数据" class="headerlink" title="添加测试数据"></a>添加测试数据</h2><p>如果已经按照<a href="/2024/06/19/abp-vNext-tutorials-part-1/" title="第一部分">第一部分</a>中的操作创建了数据种子，则相同的数据也在测试中可用。 如果未创建种子数据，可以使用 <code>BookStoreTestDataSeedContributor</code> 为后续的测试准备种子数据</p>
+<h2 id="测试-BookAppService"><a href="#测试-BookAppService" class="headerlink" title="测试 BookAppService"></a>测试 BookAppService</h2><p>在 <code>Acme.BookStore.Application.Tests</code> 项目的 <code>Books</code> 命名空间(文件夹)中创建一个名叫 <code>BookAppService_Tests</code> 的测试类：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> Shouldly;</span><br><span class="line"><span class="keyword">using</span> Volo.Abp.Application.Dtos;</span><br><span class="line"><span class="keyword">using</span> Volo.Abp.Modularity;</span><br><span class="line"><span class="keyword">using</span> Volo.Abp.Validation;</span><br><span class="line"><span class="keyword">using</span> Xunit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Acme.BookStore.Books</span>;</span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">BookAppService_Tests</span>&lt;<span class="title">TStartupModule</span>&gt; : <span class="title">BookStoreApplicationTestBase</span>&lt;<span class="title">TStartupModule</span>&gt;</span><br><span class="line">    <span class="keyword">where</span> <span class="title">TStartupModule</span> : <span class="title">IAbpModule</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> IBookAppService _bookAppService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">BookAppService_Tests</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _bookAppService = GetRequiredService&lt;IBookAppService&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Fact</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Get_List_Of_Books</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//Act</span></span><br><span class="line">        <span class="keyword">var</span> result = <span class="keyword">await</span> _bookAppService.GetListAsync(</span><br><span class="line">            <span class="keyword">new</span> PagedAndSortedResultRequestDto()</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Assert</span></span><br><span class="line">        result.TotalCount.ShouldBeGreaterThan(<span class="number">0</span>);</span><br><span class="line">        result.Items.ShouldContain(b =&gt; b.Name == <span class="string">&quot;1984&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试方法 <code>Should_Get_List_Of_Books</code> 直接使用 <code>BookAppService.GetListAsync</code> 方法来获取用户列表，并执行检查</li>
+<li>可以检查 “1984” 这本书是否包含在结果中，因为之前在种子数据中已经创建</li>
+</ul>
+<p>在 <code>Acme.BookStore.EntityFrameworkCore.Tests</code> 项目 <code>EntityFrameworkCore\Applications\Books</code> 文件夹中添加 <code>BookAppService_Tests</code> 的实现类<code>EfCoreBookAppService_Tests.cs</code> ：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Acme.BookStore.Books;</span><br><span class="line"><span class="keyword">using</span> Xunit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Acme.BookStore.EntityFrameworkCore.Applications.Books</span>;</span><br><span class="line"></span><br><span class="line">[<span class="meta">Collection(BookStoreTestConsts.CollectionDefinitionName)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EfCoreBookAppService_Tests</span> : <span class="title">BookAppService_Tests</span>&lt;<span class="title">BookStoreEntityFrameworkCoreTestModule</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新增测试方法，创建一个<code>Book</code>实体的场景：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Fact</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Create_A_Valid_Book</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//Act</span></span><br><span class="line">    <span class="keyword">var</span> result = <span class="keyword">await</span> _bookAppService.CreateAsync(</span><br><span class="line">        <span class="keyword">new</span> CreateUpdateBookDto</span><br><span class="line">        &#123;</span><br><span class="line">            Name = <span class="string">&quot;New test book 42&quot;</span>,</span><br><span class="line">            Price = <span class="number">10</span>,</span><br><span class="line">            PublishDate = DateTime.Now,</span><br><span class="line">            Type = BookType.ScienceFiction</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Assert</span></span><br><span class="line">    result.Id.ShouldNotBe(Guid.Empty);</span><br><span class="line">    result.Name.ShouldBe(<span class="string">&quot;New test book 42&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新增测试方法，创建一个错误<code>book</code>实体失败的场景：</p>
+<ul>
+<li>由于 <code>Name</code> 是空值，ABP 抛出一个 <code>AbpValidationException</code> 异常</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Fact</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Not_Create_A_Book_Without_Name</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> exception = <span class="keyword">await</span> Assert.ThrowsAsync&lt;AbpValidationException&gt;(<span class="keyword">async</span> () =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">await</span> _bookAppService.CreateAsync(</span><br><span class="line">            <span class="keyword">new</span> CreateUpdateBookDto</span><br><span class="line">            &#123;</span><br><span class="line">                Name = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                Price = <span class="number">10</span>,</span><br><span class="line">                PublishDate = DateTime.Now,</span><br><span class="line">                Type = BookType.ScienceFiction</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    exception.ValidationErrors</span><br><span class="line">        .ShouldContain(err =&gt; err.MemberNames.Any(mem =&gt; mem == <span class="string">&quot;Name&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终的测试类如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> Shouldly;</span><br><span class="line"><span class="keyword">using</span> Volo.Abp.Application.Dtos;</span><br><span class="line"><span class="keyword">using</span> Volo.Abp.Validation;</span><br><span class="line"><span class="keyword">using</span> Xunit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Acme.BookStore.Books</span></span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">BookAppService_Tests</span>&lt;<span class="title">TStartupModule</span>&gt; : <span class="title">BookStoreApplicationTestBase</span>&lt;<span class="title">TStartupModule</span>&gt;</span><br><span class="line">        <span class="keyword">where</span> <span class="title">TStartupModule</span> : <span class="title">IAbpModule</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> IBookAppService _bookAppService;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">BookAppService_Tests</span>(<span class="params"></span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _bookAppService = GetRequiredService&lt;IBookAppService&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">Fact</span>]</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Get_List_Of_Books</span>(<span class="params"></span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//Act</span></span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">await</span> _bookAppService.GetListAsync(</span><br><span class="line">                <span class="keyword">new</span> PagedAndSortedResultRequestDto()</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            <span class="comment">//Assert</span></span><br><span class="line">            result.TotalCount.ShouldBeGreaterThan(<span class="number">0</span>);</span><br><span class="line">            result.Items.ShouldContain(b =&gt; b.Name == <span class="string">&quot;1984&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">Fact</span>]</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Create_A_Valid_Book</span>(<span class="params"></span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//Act</span></span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">await</span> _bookAppService.CreateAsync(</span><br><span class="line">                <span class="keyword">new</span> CreateUpdateBookDto</span><br><span class="line">                &#123;</span><br><span class="line">                    Name = <span class="string">&quot;New test book 42&quot;</span>,</span><br><span class="line">                    Price = <span class="number">10</span>,</span><br><span class="line">                    PublishDate = DateTime.Now,</span><br><span class="line">                    Type = BookType.ScienceFiction</span><br><span class="line">                &#125;</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            <span class="comment">//Assert</span></span><br><span class="line">            result.Id.ShouldNotBe(Guid.Empty);</span><br><span class="line">            result.Name.ShouldBe(<span class="string">&quot;New test book 42&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">Fact</span>]</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Not_Create_A_Book_Without_Name</span>(<span class="params"></span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> exception = <span class="keyword">await</span> Assert.ThrowsAsync&lt;AbpValidationException&gt;(<span class="keyword">async</span> () =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">await</span> _bookAppService.CreateAsync(</span><br><span class="line">                    <span class="keyword">new</span> CreateUpdateBookDto</span><br><span class="line">                    &#123;</span><br><span class="line">                        Name = <span class="string">&quot;&quot;</span>,</span><br><span class="line">                        Price = <span class="number">10</span>,</span><br><span class="line">                        PublishDate = DateTime.Now,</span><br><span class="line">                        Type = BookType.ScienceFiction</span><br><span class="line">                    &#125;</span><br><span class="line">                );</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            exception.ValidationErrors</span><br><span class="line">                .ShouldContain(err =&gt; err.MemberNames.Any(mem =&gt; mem == <span class="string">&quot;Name&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目录如下：</p>
+<img data-src="https://cdn.jonty.top/img/202406252314984.png" alt="image-20240625231450946" style="zoom:67%;" />
+
+<p>打开<strong>测试资源管理器</strong>(测试 -&gt; Windows -&gt; 测试资源管理器)并<strong>执行所有</strong>测试</p>
+<p><img data-src="https://cdn.jonty.top/img/202406252315599.png" alt="image-20240625231511560"></p>
+<h2 id="下一节"><a href="#下一节" class="headerlink" title="下一节"></a>下一节</h2><p>教程<a href="#">Post not found: abp-vNext-tutorials-part-5 下一节</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\24\abp-vNext-tutorials-part-3\" rel="bookmark">Abp vNext - 应用开发系列之增删改</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\23\abp-vNext-tutorials-part-2\" rel="bookmark">Abp vNext - 应用开发系列之页面</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\19\abp-vNext-tutorials-part-1\" rel="bookmark">Abp vNext - 应用开发系列之服务端</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\19\getting-start-abp\" rel="bookmark">Abp vNext - 让项目跑起来</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\10\31\about-of-csharp-lazy-initialization\" rel="bookmark">Lazy延迟初始化</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>JontyWang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/" title="Abp vNext - 应用开发系列之集成测试">https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ABP/" rel="tag"># ABP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/24/abp-vNext-tutorials-part-3/" rel="prev" title="Abp vNext - 应用开发系列之增删改">
+                  <i class="fa fa-chevron-left"></i> Abp vNext - 应用开发系列之增删改
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fab fa-battle-net"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JontyWang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">393k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:57</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<span id="times">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("09/08/2021 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("times").innerHTML = "本站已安全运行 "+dnum+" 天 " +hnum + " 小时 " + mnum + " 分 " + snum + " 秒 ✌";
+    }
+setInterval("createtime()",250);
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
