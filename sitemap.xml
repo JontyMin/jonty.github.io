@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jonty.top/2024/06/27/abp-vNext-tutorials-part-5/</loc>
+    
+    <lastmod>2024-07-23</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jonty.top/2024/07/23/azure-attach-disk/</loc>
+    
+    <lastmod>2024-07-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/</loc>
     
     <lastmod>2024-07-23</lastmod>
     
@@ -12,13 +26,6 @@
     <loc>https://jonty.top/2024/06/23/abp-vNext-tutorials-part-2/</loc>
     
     <lastmod>2024-06-29</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/</loc>
-    
-    <lastmod>2024-06-25</lastmod>
     
   </url>
   
@@ -557,14 +564,14 @@
 
   
   <url>
-    <loc>https://jonty.top/tags/Share/</loc>
+    <loc>https://jonty.top/tags/QA/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://jonty.top/tags/QA/</loc>
+    <loc>https://jonty.top/tags/Share/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -613,6 +620,13 @@
   </url>
   
   <url>
+    <loc>https://jonty.top/tags/Blazor/</loc>
+    <lastmod>2024-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jonty.top/tags/Azure/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
@@ -621,13 +635,6 @@
   
   <url>
     <loc>https://jonty.top/tags/Disk/</loc>
-    <lastmod>2024-07-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/tags/Blazor/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -656,20 +663,6 @@
   
   <url>
     <loc>https://jonty.top/tags/Web-Debug/</loc>
-    <lastmod>2024-07-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/tags/Github/</loc>
-    <lastmod>2024-07-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/tags/TypeScript/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -711,6 +704,20 @@
   </url>
   
   <url>
+    <loc>https://jonty.top/tags/Github/</loc>
+    <lastmod>2024-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jonty.top/tags/TypeScript/</loc>
+    <lastmod>2024-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jonty.top/tags/Gitlab/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
@@ -746,6 +753,13 @@
   </url>
   
   <url>
+    <loc>https://jonty.top/tags/Docker-Swarm/</loc>
+    <lastmod>2024-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jonty.top/tags/Nexus/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
@@ -761,13 +775,6 @@
   
   <url>
     <loc>https://jonty.top/tags/Nginx/</loc>
-    <lastmod>2024-07-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/tags/Docker-Swarm/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -837,14 +844,14 @@
   </url>
   
   <url>
-    <loc>https://jonty.top/tags/Runner/</loc>
+    <loc>https://jonty.top/tags/Hello-World/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://jonty.top/tags/Hello-World/</loc>
+    <loc>https://jonty.top/tags/Runner/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -970,6 +977,20 @@
   </url>
   
   <url>
+    <loc>https://jonty.top/tags/VMware/</loc>
+    <lastmod>2024-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jonty.top/tags/%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2024-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jonty.top/tags/Grafana/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
@@ -992,20 +1013,6 @@
   
   <url>
     <loc>https://jonty.top/tags/LPG/</loc>
-    <lastmod>2024-07-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/tags/VMware/</loc>
-    <lastmod>2024-07-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonty.top/tags/%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2024-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
