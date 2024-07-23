@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jonty.top/2024/07/23/azure-attach-disk/</loc>
+    <lastmod>2024-07-23</lastmod>
+  </url>
+  <url>
+    <loc>https://jonty.top/2024/06/23/abp-vNext-tutorials-part-2/</loc>
+    <lastmod>2024-06-29</lastmod>
+  </url>
+  <url>
     <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/</loc>
     <lastmod>2024-06-25</lastmod>
   </url>
@@ -10,10 +18,6 @@
   </url>
   <url>
     <loc>https://jonty.top/2024/06/19/abp-vNext-tutorials-part-1/</loc>
-    <lastmod>2024-06-25</lastmod>
-  </url>
-  <url>
-    <loc>https://jonty.top/2024/06/23/abp-vNext-tutorials-part-2/</loc>
     <lastmod>2024-06-25</lastmod>
   </url>
   <url>
