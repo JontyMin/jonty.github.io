@@ -35,7 +35,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jonty.top/img/202407231816055.png">
 <meta property="article:published_time" content="2024-06-27T23:40:14.000Z">
-<meta property="article:modified_time" content="2024-07-23T11:01:35.025Z">
+<meta property="article:modified_time" content="2024-07-26T09:43:55.277Z">
 <meta property="article:author" content="JontyWang">
 <meta property="article:tag" content="ABP">
 <meta name="twitter:card" content="summary">
@@ -156,7 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entity"><span class="nav-number">2.</span> <span class="nav-text">Entity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository"><span class="nav-number">3.</span> <span class="nav-text">Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Domain"><span class="nav-number">4.</span> <span class="nav-text">Domain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">4.1.</span> <span class="nav-text">目录</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entity"><span class="nav-number">2.</span> <span class="nav-text">Entity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository"><span class="nav-number">3.</span> <span class="nav-text">Repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Domain"><span class="nav-number">4.</span> <span class="nav-text">Domain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">4.1.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E8%8A%82"><span class="nav-number">5.</span> <span class="nav-text">下一节</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +172,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">Posts</span>
         </a>
       </div>
@@ -310,7 +310,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2024-07-23 19:01:35" itemprop="dateModified" datetime="2024-07-23T19:01:35+08:00">2024-07-23</time>
+        <time title="Modified: 2024-07-26 17:43:55" itemprop="dateModified" datetime="2024-07-26T17:43:55+08:00">2024-07-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -336,7 +336,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>4.8k</span>
+      <span>4.7k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -371,8 +371,8 @@
 <li> Part 6：作者: 领域层（本节）</li>
 <li><a href="/2024/06/28/abp-vNext-tutorials-part-7/" title="Part 7：作者: 数据访问">Part 7：作者: 数据访问</a></li>
 <li><a href="/2024/06/29/abp-vNext-tutorials-part-8/" title="Part 8：作者: 应用服务层">Part 8：作者: 应用服务层</a></li>
-<li><a href="#">Post not found: abp-vNext-tutorials-part-9 Part 9：作者: 用户界面</a></li>
-<li><a href="#">Post not found: abp-vNext-tutorials-part-10 Part 10：图书到作者的关系</a></li>
+<li><a href="/2024/06/30/abp-vNext-tutorials-part-9/" title="Part 9：作者: 用户界面">Part 9：作者: 用户界面</a></li>
+<li><a href="/2024/06/30/abp-vNext-tutorials-part-10/" title="Part 10：图书关联作者">Part 10：图书关联作者</a></li>
 </ul>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在前面的部分中，我们使用了ABP基础设施来快速创建了一些服务：</p>
 <ul>
@@ -433,6 +433,7 @@
 <p>抛出 <code>AuthorAlreadyExistsException</code> 时，用户会在 UI 上看到此错误消息。</p>
 <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>这部分涵盖了书店应用程序的作者功能的领域层。下图展示了此部分中创建/更新的主要文件：</p>
 <p><img data-src="https://cdn.jonty.top/img/202407231816055.png" alt="folder"></p>
+<h2 id="下一节"><a href="#下一节" class="headerlink" title="下一节"></a>下一节</h2><p>教程<a href="/2024/06/28/abp-vNext-tutorials-part-7/" title="下一节">下一节</a></p>
 
     </div>
 
@@ -443,6 +444,12 @@
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\30\abp-vNext-tutorials-part-10\" rel="bookmark">Abp vNext - 应用开发系列之数据关联</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\30\abp-vNext-tutorials-part-9\" rel="bookmark">Abp vNext - 应用开发系列之用户界面</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2024\06\29\abp-vNext-tutorials-part-8\" rel="bookmark">Abp vNext - 应用开发系列之应用层</a></div>
     </li>
     <li class="popular-posts-item">
@@ -450,12 +457,6 @@
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2024\06\27\abp-vNext-tutorials-part-5\" rel="bookmark">Abp vNext - 应用开发系列之授权</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2024\06\24\abp-vNext-tutorials-part-4\" rel="bookmark">Abp vNext - 应用开发系列之集成测试</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2024\06\24\abp-vNext-tutorials-part-3\" rel="bookmark">Abp vNext - 应用开发系列之增删改</a></div>
     </li>
   </ul>
 
@@ -542,13 +543,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">420k</span>
+    <span title="Symbols count total">444k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">6:22</span>
+    <span title="Reading time total">6:43</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
     <loc>https://jonty.top/2024/06/29/abp-vNext-tutorials-part-8/</loc>
     <lastmod>2024-07-26</lastmod>
   </url>
   <url>
     <loc>https://jonty.top/2024/06/28/abp-vNext-tutorials-part-7/</loc>
-    <lastmod>2024-07-23</lastmod>
+    <lastmod>2024-07-26</lastmod>
   </url>
   <url>
     <loc>https://jonty.top/2024/06/28/abp-vNext-tutorials-part-6/</loc>
-    <lastmod>2024-07-23</lastmod>
-  </url>
-  <url>
-    <loc>https://jonty.top/2024/06/19/abp-vNext-tutorials-part-1/</loc>
-    <lastmod>2024-07-23</lastmod>
-  </url>
-  <url>
-    <loc>https://jonty.top/2024/06/23/abp-vNext-tutorials-part-2/</loc>
-    <lastmod>2024-07-23</lastmod>
-  </url>
-  <url>
-    <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-3/</loc>
-    <lastmod>2024-07-23</lastmod>
-  </url>
-  <url>
-    <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/</loc>
-    <lastmod>2024-07-23</lastmod>
+    <lastmod>2024-07-26</lastmod>
   </url>
   <url>
     <loc>https://jonty.top/2024/06/27/abp-vNext-tutorials-part-5/</loc>
-    <lastmod>2024-07-23</lastmod>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://jonty.top/2024/06/30/abp-vNext-tutorials-part-10/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-4/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://jonty.top/2024/06/24/abp-vNext-tutorials-part-3/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://jonty.top/2024/06/23/abp-vNext-tutorials-part-2/</loc>
+    <lastmod>2024-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://jonty.top/2024/06/19/abp-vNext-tutorials-part-1/</loc>
+    <lastmod>2024-07-26</lastmod>
   </url>
   <url>
     <loc>https://jonty.top/2024/07/23/azure-attach-disk/</loc>

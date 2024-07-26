@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="WSIOb3JOJfAsz23EBri68OoFPPfXmPefVY8l9LWiuuQ">
+  <meta name="msvalidate.01" content="BEA1533D8925BA7876293C434544D574">
+  <meta name="baidu-site-verification" content="code-xBDMwADkQe">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=ZCOOL+XiaoWei:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jonty.top","root":"/","images":"/images","scheme":"Mist","version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="基于Abp vNext开发Web应用程序系列 - 用户界面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Abp vNext - 应用开发系列之用户界面">
+<meta property="og:url" content="https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/index.html">
+<meta property="og:site_name" content="Jonty&#39;s Blog">
+<meta property="og:description" content="基于Abp vNext开发Web应用程序系列 - 用户界面">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jonty.top/img/202407261511421.png">
+<meta property="og:image" content="https://cdn.jonty.top/img/202407261605015.png">
+<meta property="article:published_time" content="2024-06-30T06:57:55.000Z">
+<meta property="article:modified_time" content="2024-07-26T09:44:17.418Z">
+<meta property="article:author" content="JontyWang">
+<meta property="article:tag" content="ABP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jonty.top/img/202407261511421.png">
+
+
+<link rel="canonical" href="https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/","path":"2024/06/30/abp-vNext-tutorials-part-9/","title":"Abp vNext - 应用开发系列之用户界面"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Abp vNext - 应用开发系列之用户界面 | Jonty's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?276415dc0899b092905c4c2730a113a8"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Jonty's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonty's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录搬砖生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Author%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Author管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AuthorModule"><span class="nav-number">1.1.</span> <span class="nav-text">AuthorModule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95"><span class="nav-number">1.2.</span> <span class="nav-text">添加菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%BB%A3%E7%90%86%E7%B1%BB"><span class="nav-number">1.3.</span> <span class="nav-text">生成代理类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AuthorComponent"><span class="nav-number">1.4.</span> <span class="nav-text">AuthorComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">本地化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">下一节</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="JontyWang"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">JontyWang</p>
+  <div class="site-description" itemprop="description">莫道桑榆晚，为霞尚满天</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">Posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">Categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-name">Tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/JontyMin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JontyMin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:amazing4677@gmail.com" title="E-Mail → mailto:amazing4677@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/14014911/jonty" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;14014911&#x2F;jonty" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://jontymin.github.io/" title="https:&#x2F;&#x2F;jontymin.github.io&#x2F;" rel="noopener" target="_blank">Github</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://my_netinlove.gitee.io/" title="https:&#x2F;&#x2F;my_netinlove.gitee.io&#x2F;" rel="noopener" target="_blank">Gitee</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/179850046" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;179850046" rel="noopener" target="_blank">Bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/JontyWang/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;JontyWang&#x2F;" rel="noopener" target="_blank">我的园子</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://abp.io/" title="https:&#x2F;&#x2F;abp.io&#x2F;" rel="noopener" target="_blank">ABP</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/abpframework/abp" title="https:&#x2F;&#x2F;github.com&#x2F;abpframework&#x2F;abp" rel="noopener" target="_blank">ABP Framework</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://docs.abp.io/en/abp/latest/" title="https:&#x2F;&#x2F;docs.abp.io&#x2F;en&#x2F;abp&#x2F;latest&#x2F;" rel="noopener" target="_blank">ABP Document</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/minisite/goods?userCode=b0skjdai&share_source=copy_link" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;minisite&#x2F;goods?userCode&#x3D;b0skjdai&amp;share_source&#x3D;copy_link" rel="noopener" target="_blank">Aliyun</a>
+        </li>
+    </ul>
+  </div>
+
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=543747557&auto=1&height=66"></iframe>
+
+          </div>
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+
+  </aside>
+  <div class="sidebar-dimmer">
+  
+  </div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="JontyWang">
+      <meta itemprop="description" content="莫道桑榆晚，为霞尚满天">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonty's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Abp vNext - 应用开发系列之用户界面
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-06-30 14:57:55" itemprop="dateCreated datePublished" datetime="2024-06-30T14:57:55+08:00">2024-06-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-07-26 17:44:17" itemprop="dateModified" datetime="2024-07-26T17:44:17+08:00">2024-07-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Abp-vNext/" itemprop="url" rel="index"><span itemprop="name">Abp vNext</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>10 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">基于Abp vNext开发Web应用程序系列 - 用户界面</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在系列教程中，我们会构建一个基于ABP的Web应用程序，用于管理书籍及其作者列表</p>
+<p>使用到的技术：</p>
+<ul>
+<li>Entity Framework Core</li>
+<li>Angular</li>
+</ul>
+<p>本教程分为以下部分：</p>
+<ul>
+<li><a href="/2024/06/19/abp-vNext-tutorials-part-1/" title="Part1：创建服务端">Part1：创建服务端</a></li>
+<li><a href="/2024/06/23/abp-vNext-tutorials-part-2/" title="Part 2：图书列表页面">Part 2：图书列表页面</a></li>
+<li><a href="/2024/06/24/abp-vNext-tutorials-part-3/" title="Part 3：创建,更新和删除图书">Part 3：创建,更新和删除图书</a></li>
+<li><a href="/2024/06/24/abp-vNext-tutorials-part-4/" title="Part 4: 集成测试">Part 4: 集成测试</a></li>
+<li><a href="/2024/06/27/abp-vNext-tutorials-part-5/" title="Part 5：授权">Part 5：授权</a></li>
+<li><a href="/2024/06/28/abp-vNext-tutorials-part-6/" title="Part 6：作者: 领域层">Part 6：作者: 领域层</a></li>
+<li><a href="/2024/06/28/abp-vNext-tutorials-part-7/" title="Part 7：作者: 数据访问">Part 7：作者: 数据访问</a></li>
+<li><a href="/2024/06/29/abp-vNext-tutorials-part-8/" title="Part 8：作者: 应用服务层">Part 8：作者: 应用服务层</a></li>
+<li>Part 9：作者: 用户界面 （本节）</li>
+<li><a href="/2024/06/30/abp-vNext-tutorials-part-10/" title="Part 10：图书关联作者">Part 10：图书关联作者</a></li>
+</ul>
+<h2 id="Author管理"><a href="#Author管理" class="headerlink" title="Author管理"></a>Author管理</h2><p>在<code>angular</code>目录下，使用以下命令创建新的模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜ yarn ng generate module author --module app --routing --route authors</span><br><span class="line">yarn run v1.22.19</span><br><span class="line">$ ng generate module author --module app --routing --route authors</span><br><span class="line">CREATE src/app/author/author-routing.module.ts (354 bytes)</span><br><span class="line">CREATE src/app/author/author.module.ts (372 bytes)</span><br><span class="line">CREATE src/app/author/author.component.html (22 bytes)</span><br><span class="line">CREATE src/app/author/author.component.spec.ts (624 bytes)</span><br><span class="line">CREATE src/app/author/author.component.ts (210 bytes)</span><br><span class="line">CREATE src/app/author/author.component.scss (0 bytes)</span><br><span class="line">UPDATE src/app/app-routing.module.ts (2284 bytes)</span><br><span class="line">Done <span class="keyword">in</span> 1.21s.</span><br></pre></td></tr></table></figure>
+
+<h3 id="AuthorModule"><a href="#AuthorModule" class="headerlink" title="AuthorModule"></a>AuthorModule</h3><p>打开<code>/src/app/author/author.module.ts</code>，新增<code>NgbDatepickerModule </code>导入：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; NgModule &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line">import &#123; SharedModule &#125; from &#x27;../shared/shared.module&#x27;;</span><br><span class="line">import &#123; AuthorRoutingModule &#125; from &#x27;./author-routing.module&#x27;;</span><br><span class="line">import &#123; AuthorComponent &#125; from &#x27;./author.component&#x27;;</span><br><span class="line">import &#123; NgbDatepickerModule &#125; from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;</span><br><span class="line"></span><br><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [AuthorComponent],</span><br><span class="line">  imports: [SharedModule, AuthorRoutingModule, NgbDatepickerModule],</span><br><span class="line">&#125;)</span><br><span class="line">export class AuthorModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在 <code>src/app/route.provider.ts</code> 中添加菜单：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: &#x27;/authors&#x27;,</span><br><span class="line">  name: &#x27;::Menu:Authors&#x27;,</span><br><span class="line">  parentName: &#x27;::Menu:BookStore&#x27;,</span><br><span class="line">  layout: eLayoutType.application,</span><br><span class="line">  requiredPolicy: &#x27;BookStore.Authors&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调整<code>/book-store</code>菜单权限，新增作者权限</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: &#x27;/book-store&#x27;,</span><br><span class="line">  name: &#x27;::Menu:BookStore&#x27;,</span><br><span class="line">  iconClass: &#x27;fas fa-book&#x27;,</span><br><span class="line">  order: <span class="number">2</span>,</span><br><span class="line">  layout: eLayoutType.application,</span><br><span class="line">  requiredPolicy: &#x27;BookStore.Books || BookStore.Authors&#x27;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>完整菜单配置如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">configureRoutes</span>(<span class="params">routes: RoutesService</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    routes.add([</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;::Menu:Home&#x27;</span>,</span><br><span class="line">        <span class="attr">iconClass</span>: <span class="string">&#x27;fas fa-home&#x27;</span>,</span><br><span class="line">        <span class="attr">order</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">layout</span>: eLayoutType.application,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/book-store&#x27;</span>,</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;::Menu:BookStore&#x27;</span>,</span><br><span class="line">        <span class="attr">iconClass</span>: <span class="string">&#x27;fas fa-book&#x27;</span>,</span><br><span class="line">        <span class="attr">order</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">layout</span>: eLayoutType.application,</span><br><span class="line">        <span class="attr">requiredPolicy</span>: <span class="string">&#x27;BookStore.Books || BookStore.Authors&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/books&#x27;</span>,</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;::Menu:Books&#x27;</span>,</span><br><span class="line">        <span class="attr">parentName</span>: <span class="string">&#x27;::Menu:BookStore&#x27;</span>,</span><br><span class="line">        <span class="attr">layout</span>: eLayoutType.application,</span><br><span class="line">        <span class="attr">requiredPolicy</span>: <span class="string">&#x27;BookStore.Books&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/authors&#x27;</span>,</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;::Menu:Authors&#x27;</span>,</span><br><span class="line">        <span class="attr">parentName</span>: <span class="string">&#x27;::Menu:BookStore&#x27;</span>,</span><br><span class="line">        <span class="attr">layout</span>: eLayoutType.application,</span><br><span class="line">        <span class="attr">requiredPolicy</span>: <span class="string">&#x27;BookStore.Authors&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ]);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成代理类"><a href="#生成代理类" class="headerlink" title="生成代理类"></a>生成代理类</h3><p>在<code>ng</code>目录下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abp generate-proxy -t ng</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜ abp generate-proxy -t ng</span><br><span class="line">ABP CLI 8.1.4</span><br><span class="line">A newer stable version of the ABP CLI is available: 8.2.0.</span><br><span class="line">Update Command: </span><br><span class="line">dotnet tool update -g Volo.Abp.Cli</span><br><span class="line">DELETE src/app/proxy/books</span><br><span class="line">CREATE src/app/proxy/authors/author.service.ts (1731 bytes)</span><br><span class="line">CREATE src/app/proxy/authors/models.ts (509 bytes)</span><br><span class="line">CREATE src/app/proxy/authors/index.ts (60 bytes)</span><br><span class="line">UPDATE src/app/proxy/generate-proxy.json (992802 bytes)</span><br><span class="line">UPDATE src/app/proxy/README.md (1000 bytes)</span><br><span class="line">UPDATE src/app/proxy/books/book.service.ts (1715 bytes)</span><br><span class="line">UPDATE src/app/proxy/books/models.ts (375 bytes)</span><br><span class="line">UPDATE src/app/proxy/books/book-type.enum.ts (299 bytes)</span><br><span class="line">UPDATE src/app/proxy/books/index.ts (92 bytes)</span><br><span class="line">UPDATE src/app/proxy/index.ts (99 bytes)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://cdn.jonty.top/img/202407261511421.png" alt="service proxy"></p>
+<h3 id="AuthorComponent"><a href="#AuthorComponent" class="headerlink" title="AuthorComponent"></a>AuthorComponent</h3><p>打开<code>/src/app/author/author.component.ts</code>：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component, OnInit &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line">import &#123; ListService, PagedResultDto &#125; from &#x27;@abp/ng.core&#x27;;</span><br><span class="line">import &#123; AuthorService, AuthorDto &#125; from &#x27;@proxy/authors&#x27;;</span><br><span class="line">import &#123; FormGroup, FormBuilder, Validators &#125; from &#x27;@angular/forms&#x27;;</span><br><span class="line">import &#123; NgbDateNativeAdapter, NgbDateAdapter &#125; from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;</span><br><span class="line">import &#123; ConfirmationService, Confirmation &#125; from &#x27;@abp/ng.theme.shared&#x27;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#x27;app-author&#x27;,</span><br><span class="line">  templateUrl: &#x27;./author.component.html&#x27;,</span><br><span class="line">  styleUrls: [&#x27;./author.component.scss&#x27;],</span><br><span class="line">  providers: [ListService, &#123; provide: NgbDateAdapter, useClass: NgbDateNativeAdapter &#125;],</span><br><span class="line">&#125;)</span><br><span class="line">export class AuthorComponent implements OnInit &#123;</span><br><span class="line">  author = &#123; items: [], totalCount: 0 &#125; as PagedResultDto&lt;AuthorDto&gt;;</span><br><span class="line"></span><br><span class="line">  isModalOpen = false;</span><br><span class="line"></span><br><span class="line">  form: FormGroup;</span><br><span class="line"></span><br><span class="line">  selectedAuthor = &#123;&#125; as AuthorDto;</span><br><span class="line"></span><br><span class="line">  constructor(</span><br><span class="line">    public readonly list: ListService,</span><br><span class="line">    private authorService: AuthorService,</span><br><span class="line">    private fb: FormBuilder,</span><br><span class="line">    private confirmation: ConfirmationService</span><br><span class="line">  ) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit(): void &#123;</span><br><span class="line">    const authorStreamCreator = (query) =&gt; this.authorService.getList(query);</span><br><span class="line"></span><br><span class="line">    this.list.hookToQuery(authorStreamCreator).subscribe((response) =&gt; &#123;</span><br><span class="line">      this.author = response;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  createAuthor() &#123;</span><br><span class="line">    this.selectedAuthor = &#123;&#125; as AuthorDto;</span><br><span class="line">    this.buildForm();</span><br><span class="line">    this.isModalOpen = true;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  editAuthor(id: string) &#123;</span><br><span class="line">    this.authorService.get(id).subscribe((author) =&gt; &#123;</span><br><span class="line">      this.selectedAuthor = author;</span><br><span class="line">      this.buildForm();</span><br><span class="line">      this.isModalOpen = true;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  buildForm() &#123;</span><br><span class="line">    this.form = this.fb.group(&#123;</span><br><span class="line">      name: [this.selectedAuthor.name || &#x27;&#x27;, Validators.required],</span><br><span class="line">      birthDate: [</span><br><span class="line">        this.selectedAuthor.birthDate ? new Date(this.selectedAuthor.birthDate) : null,</span><br><span class="line">        Validators.required,</span><br><span class="line">      ],</span><br><span class="line">      shortBio: [this.selectedAuthor.shortBio || &#x27;&#x27;]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  save() &#123;</span><br><span class="line">    if (this.form.invalid) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (this.selectedAuthor.id) &#123;</span><br><span class="line">      this.authorService</span><br><span class="line">        .update(this.selectedAuthor.id, this.form.value)</span><br><span class="line">        .subscribe(() =&gt; &#123;</span><br><span class="line">          this.isModalOpen = false;</span><br><span class="line">          this.form.reset();</span><br><span class="line">          this.list.get();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      debugger;</span><br><span class="line">      var input = this.form.value</span><br><span class="line">      this.authorService.create(this.form.value).subscribe(() =&gt; &#123;</span><br><span class="line">        this.isModalOpen = false;</span><br><span class="line">        this.form.reset();</span><br><span class="line">        this.list.get();</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  delete(id: string) &#123;</span><br><span class="line">    this.confirmation.warn(&#x27;::AreYouSureToDelete&#x27;, &#x27;::AreYouSure&#x27;)</span><br><span class="line">        .subscribe((status) =&gt; &#123;</span><br><span class="line">          if (status === Confirmation.Status.confirm) &#123;</span><br><span class="line">            this.authorService.delete(id).subscribe(() =&gt; this.list.get());</span><br><span class="line">          &#125;</span><br><span class="line">	    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编辑<code>/src/app/author/author.component.html</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col col-md-6&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">&quot;card-title&quot;</span>&gt;</span></span><br><span class="line">            &#123;&#123; &#x27;::Menu:Authors&#x27; | abpLocalization &#125;&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text-end col col-md-6&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text-lg-end pt-2&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> *<span class="attr">abpPermission</span>=<span class="string">&quot;&#x27;BookStore.Authors.Create&#x27;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;create&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> (<span class="attr">click</span>)=<span class="string">&quot;createAuthor()&quot;</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-plus me-1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; &#x27;::NewAuthor&#x27; | abpLocalization &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-body&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ngx-datatable</span> [<span class="attr">rows</span>]=<span class="string">&quot;author.items&quot;</span> [<span class="attr">count</span>]=<span class="string">&quot;author.totalCount&quot;</span> [<span class="attr">list</span>]=<span class="string">&quot;list&quot;</span> <span class="attr">default</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ngx-datatable-column</span></span></span><br><span class="line"><span class="tag">          [<span class="attr">name</span>]=<span class="string">&quot;&#x27;::Actions&#x27; | abpLocalization&quot;</span></span></span><br><span class="line"><span class="tag">          [<span class="attr">maxWidth</span>]=<span class="string">&quot;150&quot;</span></span></span><br><span class="line"><span class="tag">          [<span class="attr">sortable</span>]=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">ng-template</span> <span class="attr">let-row</span>=<span class="string">&quot;row&quot;</span> <span class="attr">ngx-datatable-cell-template</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">ngbDropdown</span> <span class="attr">container</span>=<span class="string">&quot;body&quot;</span> <span class="attr">class</span>=<span class="string">&quot;d-inline-block&quot;</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">button</span></span></span><br><span class="line"><span class="tag">                <span class="attr">class</span>=<span class="string">&quot;btn btn-primary btn-sm dropdown-toggle&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">data-toggle</span>=<span class="string">&quot;dropdown&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">aria-haspopup</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">ngbDropdownToggle</span></span></span><br><span class="line"><span class="tag">              &gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-cog me-1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>&#123;&#123; &#x27;::Actions&#x27; | abpLocalization &#125;&#125;</span><br><span class="line">              <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">ngbDropdownMenu</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> *<span class="attr">abpPermission</span>=<span class="string">&quot;&#x27;BookStore.Authors.Edit&#x27;&quot;</span> <span class="attr">ngbDropdownItem</span> (<span class="attr">click</span>)=<span class="string">&quot;editAuthor(row.id)&quot;</span>&gt;</span></span><br><span class="line">                  &#123;&#123; &#x27;::Edit&#x27; | abpLocalization &#125;&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> *<span class="attr">abpPermission</span>=<span class="string">&quot;&#x27;BookStore.Authors.Delete&#x27;&quot;</span> <span class="attr">ngbDropdownItem</span> (<span class="attr">click</span>)=<span class="string">&quot;delete(row.id)&quot;</span>&gt;</span></span><br><span class="line">                  &#123;&#123; &#x27;::Delete&#x27; | abpLocalization &#125;&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ngx-datatable-column</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ngx-datatable-column</span> [<span class="attr">name</span>]=<span class="string">&quot;&#x27;::Name&#x27; | abpLocalization&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ngx-datatable-column</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ngx-datatable-column</span> [<span class="attr">name</span>]=<span class="string">&quot;&#x27;::BirthDate&#x27; | abpLocalization&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">ng-template</span> <span class="attr">let-row</span>=<span class="string">&quot;row&quot;</span> <span class="attr">ngx-datatable-cell-template</span>&gt;</span></span><br><span class="line">            &#123;&#123; row.birthDate | date &#125;&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ngx-datatable-column</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ngx-datatable</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">abp-modal</span> [(<span class="attr">visible</span>)]=<span class="string">&quot;isModalOpen&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">abpHeader</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; (selectedAuthor.id ? &#x27;::Edit&#x27; : &#x27;::NewAuthor&#x27;) | abpLocalization &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">abpBody</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">form</span> [<span class="attr">formGroup</span>]=<span class="string">&quot;form&quot;</span> (<span class="attr">ngSubmit</span>)=<span class="string">&quot;save()&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;author-name&quot;</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> * <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;author-name&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">formControlName</span>=<span class="string">&quot;name&quot;</span> <span class="attr">autofocus</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mt-2&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">label</span>&gt;</span>Birth date<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> * <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">            #<span class="attr">datepicker</span>=<span class="string">&quot;ngbDatepicker&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">name</span>=<span class="string">&quot;datepicker&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">formControlName</span>=<span class="string">&quot;birthDate&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">ngbDatepicker</span></span></span><br><span class="line"><span class="tag">            (<span class="attr">click</span>)=<span class="string">&quot;datepicker.toggle()&quot;</span></span></span><br><span class="line"><span class="tag">          /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;author-shortBio&quot;</span>&gt;</span>ShortBio<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;author-shortBio&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">formControlName</span>=<span class="string">&quot;shortBio&quot;</span>  /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">    <span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">abpFooter</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-secondary&quot;</span> <span class="attr">abpClose</span>&gt;</span></span><br><span class="line">        &#123;&#123; &#x27;::Close&#x27; | abpLocalization &#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> (<span class="attr">click</span>)=<span class="string">&quot;save()&quot;</span> [<span class="attr">disabled</span>]=<span class="string">&quot;form.invalid&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-check mr-1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">        &#123;&#123; &#x27;::Save&#x27; | abpLocalization &#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">abp-modal</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h3><p>编辑<code>Acme.BookStore.Domain.Shared</code> 项目 <code>Localization/BookStore</code> 文件夹下 <code>en.json</code> 的文件，新增以下键值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Menu:Authors&quot;</span>: <span class="string">&quot;Authors&quot;</span>,</span><br><span class="line"><span class="string">&quot;Authors&quot;</span>: <span class="string">&quot;Authors&quot;</span>,</span><br><span class="line"><span class="string">&quot;AuthorDeletionConfirmationMessage&quot;</span>: <span class="string">&quot;Are you sure to delete the author &#x27;&#123;0&#125;&#x27;?&quot;</span>,</span><br><span class="line"><span class="string">&quot;BirthDate&quot;</span>: <span class="string">&quot;Birth date&quot;</span>,</span><br><span class="line"><span class="string">&quot;NewAuthor&quot;</span>: <span class="string">&quot;New author&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p><img data-src="https://cdn.jonty.top/img/202407261605015.png" alt="image-20240726160527937"></p>
+<blockquote>
+<p>如果在定义新权限后运行 <code>.DbMigrator</code> 控制台应用程序，会自动将这些新权限授予管理员角色，不需要在自己手动授予权限</p>
+</blockquote>
+<h2 id="下一节"><a href="#下一节" class="headerlink" title="下一节"></a>下一节</h2><p>教程<a href="/2024/06/30/abp-vNext-tutorials-part-10/" title="下一节">下一节</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\30\abp-vNext-tutorials-part-10\" rel="bookmark">Abp vNext - 应用开发系列之数据关联</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\29\abp-vNext-tutorials-part-8\" rel="bookmark">Abp vNext - 应用开发系列之应用层</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\28\abp-vNext-tutorials-part-7\" rel="bookmark">Abp vNext - 应用开发系列之数据访问</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\28\abp-vNext-tutorials-part-6\" rel="bookmark">Abp vNext - 应用开发系列之领域层</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\27\abp-vNext-tutorials-part-5\" rel="bookmark">Abp vNext - 应用开发系列之授权</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>JontyWang
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/" title="Abp vNext - 应用开发系列之用户界面">https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ABP/" rel="tag"># ABP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/29/abp-vNext-tutorials-part-8/" rel="prev" title="Abp vNext - 应用开发系列之应用层">
+                  <i class="fa fa-chevron-left"></i> Abp vNext - 应用开发系列之应用层
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/30/abp-vNext-tutorials-part-10/" rel="next" title="Abp vNext - 应用开发系列之数据关联">
+                  Abp vNext - 应用开发系列之数据关联 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fab fa-battle-net"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JontyWang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">444k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">6:43</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<span id="times">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("09/08/2021 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("times").innerHTML = "本站已安全运行 "+dnum+" 天 " +hnum + " 小时 " + mnum + " 分 " + snum + " 秒 ✌";
+    }
+setInterval("createtime()",250);
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://jonty.top/2024/06/30/abp-vNext-tutorials-part-9/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
