@@ -400,9 +400,9 @@
     <category term="DevOps" scheme="https://jonty.top/categories/DevOps/"/>
     
     
-    <category term="Docker" scheme="https://jonty.top/tags/Docker/"/>
-    
     <category term="Gitlab" scheme="https://jonty.top/tags/Gitlab/"/>
+    
+    <category term="Docker" scheme="https://jonty.top/tags/Docker/"/>
     
   </entry>
   
