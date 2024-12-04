@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jonty.top/2024/11/15/docker-rabbit-mq-enable-ssl/</loc>
+    <lastmod>2024-12-04</lastmod>
+  </url>
+  <url>
     <loc>https://jonty.top/2023/05/11/gitlab-runner-intranet-job/</loc>
-    <lastmod>2024-08-08</lastmod>
+    <lastmod>2024-12-04</lastmod>
   </url>
   <url>
     <loc>https://jonty.top/2023/04/12/how-to-change-docker-data-folder-configuration/</loc>

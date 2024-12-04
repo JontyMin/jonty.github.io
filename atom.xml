@@ -6,7 +6,7 @@
   <link href="https://jonty.top/atom.xml" rel="self"/>
   
   <link href="https://jonty.top/"/>
-  <updated>2024-07-23T09:34:27.815Z</updated>
+  <updated>2024-12-04T03:46:40.399Z</updated>
   <id>https://jonty.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为 RabbitMQ 服务器启用 SSL/TLS</title>
+    <link href="https://jonty.top/2024/11/15/docker-rabbit-mq-enable-ssl/"/>
+    <id>https://jonty.top/2024/11/15/docker-rabbit-mq-enable-ssl/</id>
+    <published>2024-11-15T12:43:45.000Z</published>
+    <updated>2024-12-04T03:46:40.399Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="创建证书"><a href="#创建证书" class="headerlink" title="创建证书"></a>创建证书</h3><p>克隆仓库</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/rabbitmq/tls-gen tls-gen</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> tls-gen/basic/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有make则安装</span></span><br><span class="line">make</span><br><span class="line"><span class="comment"># make PASSWORD=123456 设置密码</span></span><br><span class="line">make verify</span><br></pre></td></tr></table></figure><p>输出如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@jonty:~/rabbitmq/tls-gen/basic<span class="comment"># make verify</span></span><br><span class="line">python3 profile.py verify --common-name <span class="string">&#x27;jonty&#x27;</span></span><br><span class="line">Will verify generated certificates against the CA...</span><br><span class="line">Will verify client_jonty certificate against root CA</span><br><span class="line">/root/rabbitmq/tls-gen/basic/result/client_jonty_certificate.pem: OK</span><br><span class="line">Will verify server_firefly certificate against root CA</span><br><span class="line">/root/rabbitmq/tls-gen/basic/result/server_jonty_certificate.pem: OK</span><br></pre></td></tr></table></figure><p>查看生成的证书文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@jonty:~/rabbitmq/tls-gen/basic<span class="comment"># ls -l ./result</span></span><br><span class="line">total 32</span><br><span class="line">-rw-r--r-- 1 root root 1281 Sep  9 08:53 ca_certificate.pem</span><br><span class="line">-rw------- 1 root root 1704 Sep  9 08:53 ca_key.pem</span><br><span class="line">-rw------- 1 root root 1346 Sep  9 08:53 client_jonty_certificate.pem</span><br><span class="line">-rw------- 1 root root 1704 Sep  9 08:53 client_jonty_key.pem</span><br><span class="line">-rw------- 1 root root 3651 Sep  9 08:53 client_jonty.p12</span><br><span class="line">-rw------- 1 root root 1346 Sep  9 08:53 server_jonty_certificate.pem</span><br><span class="line">-rw------- 1 root root 1704 Sep  9 08:53 server_jonty_key.pem</span><br><span class="line">-rw------- 1 root root 3651 Sep  9 08:53 server_jonty.p12</span><br></pre></td></tr></table></figure><h3 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker compose"></a>docker compose</h3><p>创建<code>rabbitmq</code>目录</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir rabbitmq</span><br></pre></td></tr></table></figure><p>复制证书</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv tls-gen/basic/result/ ./certs</span><br><span class="line">chmod -R 777 certs/</span><br></pre></td></tr></table></figure><p>创建<code>rabbitmq.conf</code></p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## SSL configuration for AMQP (5671 port)</span></span><br><span class="line"><span class="attr">listeners.ssl.default</span> = <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">5671</span></span><br><span class="line"><span class="attr">ssl_options.certfile</span> = /etc/rabbitmq/certs/server_jonty_certificate.pem</span><br><span class="line"><span class="attr">ssl_options.keyfile</span> = /etc/rabbitmq/certs/server_jonty_key.pem</span><br><span class="line"><span class="attr">ssl_options.cacertfile</span> = /etc/rabbitmq/certs/ca_certificate.pem</span><br><span class="line"><span class="attr">ssl_options.verify</span> = verify_peer</span><br><span class="line"><span class="attr">ssl_options.fail_if_no_peer_cert</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## SSL configuration for MQTT (8883 port):q</span></span><br><span class="line"><span class="attr">mqtt.listeners.ssl.default</span> = <span class="number">8883</span></span><br><span class="line"><span class="attr">mqtt.listeners.tcp.default</span> = <span class="number">1883</span></span><br><span class="line"></span><br><span class="line"><span class="attr">ssl_options.versions.1</span> = tlsv1.<span class="number">2</span></span><br><span class="line"><span class="attr">ssl_options.versions.2</span> = tlsv1.<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## SSL configuration for management UI (HTTPS)</span></span><br><span class="line"><span class="attr">management.ssl.port</span> = <span class="number">15672</span></span><br><span class="line"><span class="attr">management.ssl.certfile</span> = /etc/rabbitmq/certs/server_jonty_certificate.pem</span><br><span class="line"><span class="attr">management.ssl.keyfile</span> = /etc/rabbitmq/certs/server_jonty_key.pem</span><br><span class="line"><span class="attr">management.ssl.cacertfile</span> = /etc/rabbitmq/certs/ca_certificate.pem</span><br><span class="line"></span><br><span class="line"><span class="comment">## use DETS (disk-based) store for retained messages</span></span><br><span class="line"><span class="attr">mqtt.retained_message_store</span> = rabbit_mqtt_retained_msg_store_dets</span><br><span class="line"><span class="comment">## only used by DETS store (in milliseconds)</span></span><br><span class="line"><span class="attr">mqtt.retained_message_store_dets_sync_interval</span> = <span class="number">2000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>创建<code>docker-compose.yml</code></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jonty/rabbitmq:3.11.10-management-mqtt</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rabbitmq</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5671:5671&quot;</span>     <span class="comment"># AMQP over SSL 端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5672:5672&quot;</span>     <span class="comment"># AMQP 端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;15672:15672&quot;</span>   <span class="comment"># 管理界面端口（HTTPS）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8883:8883&quot;</span>     <span class="comment"># MQTT over SSL 端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;1883:1883&quot;</span>     <span class="comment"># MQTT 端口</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RABBITMQ_DEFAULT_USER=admin</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RABBITMQ_DEFAULT_PASS=123456</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RABBITMQ_DEFAULT_VHOST=/</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MQTT_DEFAULT_USER=admin</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MQTT_DEFAULT_PASS=123456</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MQTT_VHOST=/</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/lib/rabbitmq</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./certs:/etc/rabbitmq/certs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf</span></span><br></pre></td></tr></table></figure><p>这里是启用了<code>mqtt</code>插件的自定义镜像</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> --platform=$TARGETPLATFORM rabbitmq:<span class="number">3.11</span>.<span class="number">10</span>-management</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> rabbitmq-plugins <span class="built_in">enable</span> --offline \</span></span><br><span class="line"><span class="bash">    rabbitmq_mqtt \</span></span><br><span class="line"><span class="bash">    rabbitmq_web_mqtt \</span></span><br><span class="line"><span class="bash">    rabbitmq_web_mqtt_examples \</span></span><br><span class="line"><span class="bash">    rabbitmq_auth_mechanism_ssl</span></span><br></pre></td></tr></table></figure><p>启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure><p>访问<code>https://your-ip:15672</code>，浏览器提示不安全，SSL证书需要由可信CA机构颁发，自签发证书需要浏览器信任可以安装<code>ca_certificate.pem</code>证书</p><p><img data-src="https://cdn.jonty.top/img/202412041142179.png" alt="image-20241204114225074"></p><blockquote><p>参考：<a href="https://www.rabbitmq.com/docs/ssl#automated-certificate-generation-transcript">TLS Support | RabbitMQ</a></p></blockquote>]]></content>
+    
+    
+    <summary type="html">Docker部署RabbitMQ - 为 RabbitMQ 服务器启用 SSL/TLS</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://jonty.top/categories/DevOps/"/>
+    
+    
+    <category term="Docker" scheme="https://jonty.top/tags/Docker/"/>
+    
+    <category term="SSL" scheme="https://jonty.top/tags/SSL/"/>
+    
+    <category term="RabbitMQ" scheme="https://jonty.top/tags/RabbitMQ/"/>
+    
+  </entry>
   
   <entry>
     <title>Azure-附加磁盘</title>
@@ -331,11 +356,11 @@
     <category term="搬砖那些事儿" scheme="https://jonty.top/categories/%E6%90%AC%E7%A0%96%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
     
     
+    <category term="ABP" scheme="https://jonty.top/tags/ABP/"/>
+    
     <category term="C#" scheme="https://jonty.top/tags/C/"/>
     
     <category term="ASP.NET Core" scheme="https://jonty.top/tags/ASP-NET-Core/"/>
-    
-    <category term="ABP" scheme="https://jonty.top/tags/ABP/"/>
     
   </entry>
   
@@ -428,27 +453,6 @@
     <category term="Redis" scheme="https://jonty.top/tags/Redis/"/>
     
     <category term="分布式锁" scheme="https://jonty.top/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>给博客装个空调</title>
-    <link href="https://jonty.top/2023/06/01/air-conditioner/"/>
-    <id>https://jonty.top/2023/06/01/air-conditioner/</id>
-    <published>2023-06-01T05:51:11.000Z</published>
-    <updated>2023-06-09T07:11:35.365Z</updated>
-    
-    <content type="html"><![CDATA[<iframe height="840" width="100%" src="https://ac.yunyoujun.cn"></iframe>]]></content>
-    
-    
-    <summary type="html">唯一的缺憾是，没有风。</summary>
-    
-    
-    
-    <category term="人生是一场未知的旅行" scheme="https://jonty.top/categories/%E4%BA%BA%E7%94%9F%E6%98%AF%E4%B8%80%E5%9C%BA%E6%9C%AA%E7%9F%A5%E7%9A%84%E6%97%85%E8%A1%8C/"/>
-    
-    
-    <category term="Share" scheme="https://jonty.top/tags/Share/"/>
     
   </entry>
   
